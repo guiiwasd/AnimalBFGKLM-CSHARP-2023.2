@@ -1,0 +1,111 @@
+﻿@model AnimalBFGKLM.Models.AnimalTipo
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastrar Animais</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Domestico" id="Domestico" /> @Html.DisplayNameFor(model => model.Domestico)
+                </label>
+            </div>
+
+            <div id="comportamentoDiv" class="form-group">
+                <label asp-for="Comportamento" class="control-label"></label>
+                <input asp-for="Comportamento" class="form-control" />
+                <span asp-validation-for="Comportamento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Selvagem" id="Selvagem" /> @Html.DisplayNameFor(model => model.Selvagem)
+                </label>
+            </div>
+
+            <div id="habitatDiv" class="form-group">
+                <label asp-for="Habitat" class="control-label"></label>
+                <input asp-for="Habitat" class="form-control" />
+                <span asp-validation-for="Habitat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Peso" class="control-label"></label>
+                <input asp-for="Peso" class="form-control" />
+                <span asp-validation-for="Peso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idade" class="control-label"></label>
+                <input asp-for="Idade" class="form-control" />
+                <span asp-validation-for="Idade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            toggleComportamentoVisibility();
+            toggleHabitatVisibility();
+
+            $('#Domestico').change(function () {
+                toggleComportamentoVisibility();
+            });
+
+            $('#Selvagem').change(function () {
+                toggleHabitatVisibility();
+            });
+
+            function toggleComportamentoVisibility() {
+                var comportamentoDiv = $('#comportamentoDiv');
+                var domesticoCheckbox = $('#Domestico');
+
+                if (domesticoCheckbox.is(':checked')) {
+                    comportamentoDiv.show();
+                } else {
+                    comportamentoDiv.hide();
+                }
+            }
+
+            function toggleHabitatVisibility() {
+                var habitatDiv = $('#habitatDiv');
+                var selvagemCheckbox = $('#Selvagem');
+
+                if (selvagemCheckbox.is(':checked')) {
+                    habitatDiv.show();
+                } else {
+                    habitatDiv.hide();
+                }
+            }
+        });
+    </script>
+}
